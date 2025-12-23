@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Offline - Immunization Tracker</title>
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      background: linear-gradient(135deg, #006400 0%, #004d00 100%);
+      color: white;
+      text-align: center;
+      padding: 20px;
+    }
+    .container {
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(10px);
+      border-radius: 20px;
+      padding: 40px;
+      max-width: 500px;
+    }
+    h1 {
+      font-size: 48px;
+      margin-bottom: 20px;
+    }
+    p {
+      margin-bottom: 30px;
+      opacity: 0.9;
+    }
+    .icon {
+      font-size: 80px;
+      margin-bottom: 20px;
+      animation: pulse 2s infinite;
+    }
+    @keyframes pulse {
+      0% { transform: scale(1); opacity: 0.7; }
+      50% { transform: scale(1.1); opacity: 1; }
+      100% { transform: scale(1); opacity: 0.7; }
+    }
+    button {
+      background: white;
+      color: #006400;
+      border: none;
+      padding: 12px 24px;
+      border-radius: 8px;
+      font-weight: 600;
+      cursor: pointer;
+      font-size: 16px;
+      transition: transform 0.3s;
+      margin: 5px;
+    }
+    button:hover {
+      transform: translateY(-2px);
+    }
+    .actions {
+      display: flex;
+      gap: 10px;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="icon">📶</div>
+    <h1>You're Offline</h1>
+    <p>The Immunization Tracker app requires an internet connection to sync data with the server.</p>
+    <p>You can still view previously loaded data. Your data will sync automatically when you're back online.</p>
+    
+    <div class="actions">
+      <button onclick="window.location.reload()">Try Again</button>
+      <button onclick="window.location.href = '/'">Go Home</button>
+    </div>
+    
+    <div style="margin-top: 30px; font-size: 14px; opacity: 0.8;">
+      <p>Offline features available:</p>
+      <ul style="text-align: left; margin-top: 10px;">
+        <li>View cached children data</li>
+        <li>View immunization schedules</li>
+        <li>Register new children (will sync later)</li>
+      </ul>
+    </div>
+  </div>
+  <script>
+    // Check connectivity periodically
+    setInterval(() => {
+      if (navigator.onLine) {
+        window.location.reload();
+      }
+    }, 5000);
+    
+    // Listen for online event
+    window.addEventListener('online', () => {
+      window.location.reload();
+    });
+  </script>
+</body>
+</html>
